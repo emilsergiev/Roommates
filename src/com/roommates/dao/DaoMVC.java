@@ -5,8 +5,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.roommates.model.ModelRoommate;
+import com.roommates.model.ModelUser;
 
 public class DaoMVC
 {
@@ -27,79 +29,127 @@ public class DaoMVC
 		return con;
 	}
 
-	public static int registerUser(ModelRoommate m, String sql)
-	{
-		int i = 0;
-		Connection con = connect();
-		try {
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, m.getUname());
-			ps.setString(2, m.getPass());
-			ps.setString(3, m.getFname());
-			ps.setString(4, m.getLname());
-			ps.setString(5, m.getEmail());
-			ps.setString(6, m.getSques());
-			ps.setString(7, m.getAns());
-			ps.setString(8, m.getPhone());
-			ps.setString(9, m.getType());
-			ps.setString(10, m.getAvatar());
-			i = ps.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return i;
-	}
-
-	public static ResultSet loginUser(ModelRoommate m, String sql)
+	public static ResultSet findUser(ModelUser user)
 	{
 		ResultSet rs = null;
 		Connection con = connect();
+		String sql = "SELECT * FROM users WHERE uname = ?";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, m.getUname());
-			ps.setString(2, m.getPass());
+			ps.setString(1, user.getUname());
 			rs = ps.executeQuery();
+			//con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return rs;
 	}
 
-	public static int updateUser(ModelRoommate m, String sql)
+	public static int registerUser(ModelUser user)
 	{
 		int i = 0;
 		Connection con = connect();
+		String sql = "INSERT INTO users VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, m.getFname());
-			ps.setString(2, m.getLname());
-			ps.setString(3, m.getEmail());
-			ps.setString(4, m.getSques());
-			ps.setString(5, m.getAns());
-			ps.setString(6, m.getPhone());
-			ps.setString(7, m.getType());
-			ps.setString(8, m.getUname());
+			ps.setString(1, user.getUname());
+			ps.setString(2, user.getEmail());
+			ps.setString(3, user.getPass());
+			ps.setString(4, user.getGender());
+			ps.setString(5, user.getCity());
+			ps.setString(6, user.getCountry());
+			ps.setString(7, user.getPhone());
+			ps.setString(8, user.getType());
+			ps.setString(9, user.getAvatar());
+			ps.setDate(10, user.getSignup());
+			ps.setLong(11, user.getLastLogin());
+			ps.setLong(12, user.getNotesCheck());
 			i = ps.executeUpdate();
+			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return i;
 	}
 
-	public static int resetPass(ModelRoommate m, String sql)
+	public static ResultSet loginUser(ModelUser user)
+	{
+		ResultSet rs = null;
+		Connection con = connect();
+		String sql = "SELECT * FROM users WHERE uname = ? AND pass = ?";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, user.getUname());
+			ps.setString(2, user.getPass());
+			rs = ps.executeQuery();
+			//con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+
+	public static int updateUser(ModelUser user)
 	{
 		int i = 0;
 		Connection con = connect();
-		
+		String sql = "UPDATE users SET email = ?, gender = ?, city = ?, country = ?, phone = ?, type = ?"
+				+ " WHERE uname = ?";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, m.getPass());
-			ps.setString(2, m.getUname());
+			ps.setString(1, user.getEmail());
+			ps.setString(2, user.getGender());
+			ps.setString(3, user.getCity());
+			ps.setString(4, user.getCountry());
+			ps.setString(5, user.getPhone());
+			ps.setString(6, user.getType());
+			ps.setString(7, user.getUname());
 			i = ps.executeUpdate();
+			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return i;
+	}
+
+	public static int resetPass(ModelUser user)
+	{
+		int i = 0;
+		Connection con = connect();
+		String sql = "UPDATE users SET pass = ? WHERE uname = ?";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, user.getPass());
+			ps.setString(2, user.getUname());
+			i = ps.executeUpdate();
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return i;
+	}
+
+	public static List<ModelUser> queryUsers() throws SQLException
+	{
+		Connection con = connect();
+		String sql = "SELECT uname, avatar FROM users";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ResultSet rs = ps.executeQuery();
+		List<ModelUser> list = new ArrayList<ModelUser>();
+
+		while (rs.next())
+		{
+			String uname = rs.getString("uname");
+			String avatar = rs.getString("avatar");
+			ModelUser roommate = new ModelUser();
+			roommate.setUname(uname);
+			roommate.setAvatar(avatar);
+			list.add(roommate);
+		}
+		con.close();
+		return list;
 	}
 
 }

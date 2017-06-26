@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,18 +8,18 @@
 <body>
 	<h1>-= Login Page =-</h1>
 	<p>${msg}</p>
-	<form action="LoginServlet" method="post">
+	<form action="Login" method="post">
 		<table>
 			<tr>
-				<td>username</td>
+				<td>* Username:</td>
 				<td><input type="text" name="uname"></td>
 			</tr>
 			<tr>
-				<td>password</td>
+				<td>* Password</td>
 				<td><input type="password" name="pass"></td>
 			</tr>
 			<tr>
-				<td>...</td>
+				<td><a href="${pageContext.request.contextPath}/">Cancel</a></td>
 				<td><input type="submit" value="Login"></td>
 			</tr>
 		</table>

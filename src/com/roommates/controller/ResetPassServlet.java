@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.roommates.dao.DaoMVC;
-import com.roommates.model.ModelRoommate;
+import com.roommates.model.ModelUser;
 
-@WebServlet("/ResetPassServlet")
+@WebServlet(urlPatterns = "/ResetPass")
 public class ResetPassServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
@@ -29,7 +29,7 @@ public class ResetPassServlet extends HttpServlet
 		if(oldpass.equals(null)||oldpass==""||newpass.equals(null)||newpass==""
 				||renewpass.equals(null)||renewpass=="")
 		{
-			request.setAttribute("msg", "All fields are mandatory!");
+			request.setAttribute("msg", "All fields with * are mandatory!");
 			getServletContext().getRequestDispatcher("/ResetPass.jsp").forward(request, response);
 		}
 		else if(!newpass.equals(renewpass))
@@ -44,12 +44,11 @@ public class ResetPassServlet extends HttpServlet
 		}
 		else
 		{
-			ModelRoommate m = new ModelRoommate();
-			m.setUname(uname);
-			m.setPass(newpass);
+			ModelUser user = new ModelUser();
+			user.setUname(uname);
+			user.setPass(newpass);
 			
-			String sql = "UPDATE users SET pass = ? WHERE uname = ?";
-			int i = DaoMVC.resetPass(m, sql);
+			int i = DaoMVC.resetPass(user);
 			
 			if(i != 0)
 			{

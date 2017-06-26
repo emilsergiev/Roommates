@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,47 +8,50 @@
 <body>
 	<h1>Update User Page</h1>
 	<p>${msg}</p>
-	<form action="UpdateServlet" method="post">
+	<form action="Update" method="post">
 		<table>
 			<tr>
-				<td>username</td>
+				<td>Username:</td>
 				<td>${uname}</td>
 				<td><input type="hidden" name="uname" value="${uname}"></td>
 			</tr>
 			<tr>
-				<td>first name</td>
-				<td><input type="text" name="fname" value="${fname}"></td>
+				<td>* Email:</td>
+				<td><input type="email" name="email" value="${email}" required></td>
 			</tr>
 			<tr>
-				<td>last name</td>
-				<td><input type="text" name="lname" value="${lname}"></td>
+				<td>* Gender:</td>
+				<td><select name="gender" required>
+					<option value="${gender}">${gender}</option>
+					<option value="Male">Male</option>
+					<option value="Female">Female</option>
+				</select></td>
 			</tr>
 			<tr>
-				<td>email</td>
-				<td><input type="email" name="email" value="${email}"></td>
+				<td>* City:</td>
+				<td><input type="text" name="city" value="${city}" required></td>
 			</tr>
 			<tr>
-				<td>security question</td>
-				<td><input type="text" name="sques" value="${sques}"></td>
+				<td>* Country:</td>
+				<td><select name="country" required>
+					<option value="${country}">${country}</option>
+					<jsp:include page="CountryList.jsp"></jsp:include>
+				</select></td>
 			</tr>
 			<tr>
-				<td>answer</td>
-				<td><input type="text" name="ans" value="${ans}"></td>
-			</tr>
-			<tr>
-				<td>phone</td>
+				<td>Phone:</td>
 				<td><input type="text" name="phone" value="${phone}"></td>
 			</tr>
 			<tr>
-				<td>account type</td>
-				<td><select name="type">
+				<td>* Account Type:</td>
+				<td><select name="type" required>
 					<option value="${type}">${type}</option>
 					<option value="buyer">BUYER (looking for a room)</option>
 					<option value="seller">SELLER (renting/sharing a room)</option>
 				</select></td>
 			</tr>
 			<tr>
-				<td>...</td>
+				<td><a href="${pageContext.request.contextPath}/">Cancel</a></td>
 				<td><input type="submit" value="Update"></td>
 			</tr>
 		</table>

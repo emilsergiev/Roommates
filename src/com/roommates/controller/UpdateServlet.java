@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.roommates.dao.DaoMVC;
-import com.roommates.model.ModelRoommate;
+import com.roommates.model.ModelUser;
 
-@WebServlet("/UpdateServlet")
+@WebServlet(urlPatterns = "/Update")
 public class UpdateServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
@@ -20,50 +20,43 @@ public class UpdateServlet extends HttpServlet
 			throws ServletException, IOException
 	{
 		String uname = request.getParameter("uname");
-		String fname = request.getParameter("fname");
-		String lname = request.getParameter("lname");
 		String email = request.getParameter("email");
-		String sques = request.getParameter("sques");
-		String ans = request.getParameter("ans");
+		String gender = request.getParameter("gender");
+		String city = request.getParameter("city");
+		String country = request.getParameter("country");
 		String phone = request.getParameter("phone");
 		String type = request.getParameter("type");
 
 		HttpSession session = request.getSession();
-		ModelRoommate m = new ModelRoommate();
-		m.setUname(uname);
-		m.setFname(fname);
-		m.setLname(lname);
-		m.setEmail(email);
-		m.setSques(sques);
-		m.setAns(ans);
-		m.setPhone(phone);
-		m.setType(type);
+		session.setAttribute("uname", uname);
+		session.setAttribute("email", email);
+		session.setAttribute("gender", gender);
+		session.setAttribute("city", city);
+		session.setAttribute("country", country);
+		session.setAttribute("phone", phone);
+		session.setAttribute("type", type);
 
-		if(uname.equals(null)||uname==""||fname.equals(null)||fname==""||lname.equals(null)||lname==""
-				||email.equals(null)||email==""||sques.equals(null)||sques==""||ans.equals(null)
-				||ans==""||phone.equals(null)||phone=="")
+		ModelUser user = new ModelUser();
+		user.setUname(uname);
+		user.setEmail(email);
+		user.setGender(gender);
+		user.setCity(city);
+		user.setCountry(country);
+		user.setPhone(phone);
+		user.setType(type);
+
+		if(uname.equals(null)||uname==""||email.equals(null)||email==""||gender.equals(null)||gender==""
+				||city.equals(null)||city==""||country.equals(null)||country==""||type.equals(null)||type=="")
 		{
-			request.setAttribute("msg", "All fields are mandatory!");
+			request.setAttribute("msg", "All fields with * are mandatory!");
 			getServletContext().getRequestDispatcher("/UpdateUser.jsp").forward(request, response);
 		}
 		else
 		{
-			String sql = "UPDATE users SET fname=?, lname=?, email=?, sques=?, ans=?, phone=?, type=?"
-					+ " WHERE uname=?";
-
-			int i = DaoMVC.updateUser(m, sql);
+			int i = DaoMVC.updateUser(user);
 
 			if(i != 0)
 			{
-				session.setAttribute("uname", uname);
-				session.setAttribute("fname", fname);
-				session.setAttribute("lname", lname);
-				session.setAttribute("email", email);
-				session.setAttribute("sques", sques);
-				session.setAttribute("ans", ans);
-				session.setAttribute("phone", phone);
-				session.setAttribute("type", type);
-
 				request.setAttribute("msg", "User info updated successfully");
 				getServletContext().getRequestDispatcher("/UserMain.jsp").forward(request, response);
 			}

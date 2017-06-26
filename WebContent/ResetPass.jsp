@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,26 +8,26 @@
 <body>
 	<h1>Reset Password Page</h1>
 	<p>${msg}</p>
-	<form action="ResetPassServlet" method="post">
+	<form action="ResetPass" method="post">
 		<table>
 			<tr>
-				<td>username</td>
+				<td>Username:</td>
 				<td>${uname}</td>
 			</tr>
 			<tr>
-				<td>old password</td>
+				<td>* Old Password:</td>
 				<td><input type="password" name="oldpass"></td>
 			</tr>
 			<tr>
-				<td>new password</td>
+				<td>* New Password:</td>
 				<td><input type="password" name="newpass"></td>
 			</tr>
 			<tr>
-				<td>reenter password</td>
+				<td>* Reenter Password:</td>
 				<td><input type="password" name="renewpass"></td>
 			</tr>
 			<tr>
-				<td>...</td>
+				<td><a href="${pageContext.request.contextPath}/">Cancel</a></td>
 				<td><input type="submit" value="RESET"></td>
 			</tr>
 		</table>
