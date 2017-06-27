@@ -21,8 +21,11 @@
 %>
 </p>
 <p>Number of users: <%= n %></p>
-<form action="${pageContext.request.contextPath}/Login.jsp" method="post">
+<p><a href="${pageContext.request.contextPath}/">Home</a></p>
+<p><a href="${pageContext.request.contextPath}/Login.jsp">Login</a></p>
+<p><a href="${pageContext.request.contextPath}/Logout">Logout</a></p>
+<!-- <form action="${pageContext.request.contextPath}/Login.jsp" method="post">
     <input type="submit" value="Login" />
-</form>
+</form> -->
 </body>
 </html>

@@ -9,6 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.roommates.dao.DaoMVC;
 import com.roommates.model.ModelUser;
 
@@ -22,8 +24,14 @@ public class HomeServlet extends HttpServlet
 	{
 		String uname = request.getParameter("uname");
 
+		String owner;
+		String button;
+
 		ModelUser user = new ModelUser();
 		user.setUname(uname);
+		
+		HttpSession session = request.getSession(false);
+		String logged = (String) session.getAttribute("loggedInUser");
 
 		ResultSet rs = DaoMVC.findUser(user);
 		try {
@@ -40,11 +48,43 @@ public class HomeServlet extends HttpServlet
 				request.setAttribute("signup", rs.getString(10));
 				request.setAttribute("lastlogin", rs.getLong(11));
 				request.setAttribute("notescheck", rs.getLong(12));
+				//if(session.getAttribute("loggedInUser").equals(null))
+				if(session == null || logged == null)
+				{
+					request.setAttribute("logged", "login to check mailbox");
+					owner = "login to update your info";
+					request.setAttribute("owner", owner);
+					button = "<form action='Login' method='post'>"
+							+ "<input type='text' name='uname' placeholder='Username' required>"
+							+ "<input type='password' name='pass' placeholder='Password' required>"
+							+ "<input type='submit' value='Login'></form>";
+					request.setAttribute("button", button);
+				}
+				else if(logged.equals(uname))
+				{
+					request.setAttribute("logged", "<a href='#'>check your mailbox</a>");
+					owner = "<a href='UpdateUser.jsp'>click here to update your info</a><br>"
+							+ "<a href='ResetPass.jsp'>click here to reset your password</a>";
+					request.setAttribute("owner", owner);
+					button = "<form action='Logout' method='post'>Hello " + logged
+							+ " <input type='submit' value='Logout'></form>";
+					request.setAttribute("button", button);
+				}
+				else
+				{
+					request.setAttribute("logged", "<a href='#'>check your mailbox</a>");
+					owner = "login to update your info";
+					request.setAttribute("owner", owner);
+					button = "<form action='Logout' method='post'>Hello " + logged
+							+ " <input type='submit' value='Logout'></form>";
+					request.setAttribute("button", button);
+				}
 				getServletContext().getRequestDispatcher("/User.jsp").forward(request, response);
 			}
 			else
 			{
-				System.out.println("something smelly!");
+				request.setAttribute("banner", "something smelly!");
+				getServletContext().getRequestDispatcher("/User.jsp").forward(request, response);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

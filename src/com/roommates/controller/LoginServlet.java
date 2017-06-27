@@ -19,6 +19,12 @@ public class LoginServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 
+//	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+//			throws ServletException, IOException
+//	{
+//		doPost(request, response);
+//	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -27,7 +33,7 @@ public class LoginServlet extends HttpServlet
 
 		if(uname.equals(null)||uname==""||pass.equals(null)||pass=="")
 		{
-			request.setAttribute("msg", "All fields are mandatory!");
+			request.setAttribute("msg", "All fields with * are mandatory!");
 			getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
 		}
 		else
