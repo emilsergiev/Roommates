@@ -53,12 +53,12 @@ public class ResetPassServlet extends HttpServlet
 			if(i != 0)
 			{
 				request.setAttribute("msg", "New password updated successfully");
-				getServletContext().getRequestDispatcher("/UserMain.jsp").forward(request, response);
+				getServletContext().getRequestDispatcher("/User.jsp").forward(request, response);
 			}
 			else
 			{
 				request.setAttribute("msg", "Password NOT updated... Try after some time");
-				getServletContext().getRequestDispatcher("/UserMain.jsp").forward(request, response);
+				getServletContext().getRequestDispatcher("/User.jsp").forward(request, response);
 			}
 		}
 	}

@@ -58,12 +58,12 @@ public class UpdateServlet extends HttpServlet
 			if(i != 0)
 			{
 				request.setAttribute("msg", "User info updated successfully");
-				getServletContext().getRequestDispatcher("/UserMain.jsp").forward(request, response);
+				getServletContext().getRequestDispatcher("/User.jsp").forward(request, response);
 			}
 			else
 			{
 				request.setAttribute("msg", "User info NOT updated");
-				getServletContext().getRequestDispatcher("/UserMain.jsp").forward(request, response);
+				getServletContext().getRequestDispatcher("/User.jsp").forward(request, response);
 			}
 		}
 	}
