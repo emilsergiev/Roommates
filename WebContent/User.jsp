@@ -18,17 +18,18 @@
 				<p>${logged}</p>
 				<p>${button}</p>
 			</div>
-			<p>${uname}</p>
-			<p>${email}</p>
-			<p>${gender}</p>
-			<p>${city}</p>
-			<p>${country}</p>
-			<p>${phone}</p>
-			<p>${type}</p>
-			<p>${avatar}</p>
-			<p>${signup}</p>
-			<p>${lastlogin}</p>
-			<p>${notescheck}</p>
+			<p>${msg}</p>
+			<p>User: ${uname}</p>
+			<p>Email: ${email}</p>
+			<p>Gender: ${gender}</p>
+			<p>City: ${city}</p>
+			<p>Country: ${country}</p>
+			<p>Phone: ${phone}</p>
+			<p>Account type: ${type}</p>
+			<p>Picture: ${avatar}</p>
+			<p>Sign-up date:${signup}</p>
+			<p>Last login: ${lastlogin}</p>
+			<p>Notification check: ${notescheck}</p>
 			<p>
 				<a href="${pageContext.request.contextPath}/">Home</a>
 			</p>
