@@ -19,12 +19,6 @@ public class LoginServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 
-//	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-//			throws ServletException, IOException
-//	{
-//		doPost(request, response);
-//	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
@@ -57,9 +51,18 @@ public class LoginServlet extends HttpServlet
 					session.setAttribute("country", rs.getString(6));
 					session.setAttribute("phone", rs.getString(7));
 					session.setAttribute("type", rs.getString(8));
-					//session.setAttribute("avatar", rs.getString(9));
+					session.setAttribute("avatar", rs.getString(9));
 					session.setAttribute("loggedInUser", uname);
-					getServletContext().getRequestDispatcher("/UserMain.jsp").forward(request, response);
+					//TODO Fetch status, notifications, and friend's list from database...
+					// and forward them to the User.jsp page only (not in the session)
+					String owner = "<a href='UpdateUser.jsp'>click here to update your info</a><br>"
+							+ "<a href='ResetPass.jsp'>click here to reset your password</a>";
+					request.setAttribute("owner", owner);
+					request.setAttribute("logged", "<a href='#'>check your mailbox</a>");
+					String button = "<form action='Logout' method='post'>Hello " + uname
+							+ " <input type='submit' value='Logout'></form>";
+					request.setAttribute("button", button);
+					getServletContext().getRequestDispatcher("/User.jsp").forward(request, response);
 				}
 				else
 				{

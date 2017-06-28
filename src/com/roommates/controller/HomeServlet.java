@@ -73,7 +73,7 @@ public class HomeServlet extends HttpServlet
 				else
 				{
 					request.setAttribute("logged", "<a href='#'>check your mailbox</a>");
-					owner = "login to update your info";
+					owner = "you are not the owner of this profile...";
 					request.setAttribute("owner", owner);
 					button = "<form action='Logout' method='post'>Hello " + logged
 							+ " <input type='submit' value='Logout'></form>";

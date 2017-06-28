@@ -1,0 +1,56 @@
+@CHARSET "UTF-8";
+
+body {
+	margin: auto;
+}
+
+#backgroundimage {
+	background: linear-gradient(to bottom, white, #caccd3);
+	width: 100%;
+}
+
+#pagetop {
+	background: #45619d;
+	height: 70px;
+}
+
+#logo {
+	float: left;
+	color: white;
+	margin-left: 20px;
+}
+
+#userinfo {
+	float: right;
+	text-align: right;
+	margin: 20px;
+}
+
+#userinfo input {
+	margin-right: 5px;
+}
+
+#pagemiddle {
+	text-align: center;
+}
+
+#pagebottom {
+	background: #e0e0e0;
+	text-align: center;
+	padding: 5px;
+	margin-top: 10px;
+}
+
+.button {
+	border: 1px solid #1d3871;
+	padding: 3px 6px;
+	background: linear-gradient(to top, #637bad, #4f67a4);
+	font-weight: bold;
+	color: white;
+	cursor: pointer;
+	border-radius: 2px;
+}
+
+.button:hover {
+	background: #45619d;
+}
