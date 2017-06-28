@@ -1,7 +1,17 @@
 @CHARSET "UTF-8";
 
 body {
-	margin: auto;
+	margin: auto 150px;
+}
+
+a {
+	text-decoration: none;
+	color: #0000ff
+}
+
+a:hover {
+	text-decoration: none;
+	color: #ff0000
 }
 
 #backgroundimage {
@@ -42,7 +52,7 @@ body {
 }
 
 .button {
-	border: 1px solid #1d3871;
+	border: 2px solid #1d3871;
 	padding: 3px 6px;
 	background: linear-gradient(to top, #637bad, #4f67a4);
 	font-weight: bold;
