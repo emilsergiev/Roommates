@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
-<title>Reset Password</title>
+<title>Roommate's Network (R)</title>
 </head>
 <body>
 	<div id="backgroundimage">
@@ -15,30 +15,32 @@
 		<div id="pagemiddle">
 			<h1>Reset Password Page</h1>
 			<p>${msg}</p>
-			<form action="ResetPass" method="post">
-				<table>
-					<tr>
-						<td>Username:</td>
-						<td>${uname}</td>
-					</tr>
-					<tr>
-						<td>* Old Password:</td>
-						<td><input type="password" name="oldpass"></td>
-					</tr>
-					<tr>
-						<td>* New Password:</td>
-						<td><input type="password" name="newpass"></td>
-					</tr>
-					<tr>
-						<td>* Reenter Password:</td>
-						<td><input type="password" name="renewpass"></td>
-					</tr>
-					<tr>
-						<td><a href="${pageContext.request.contextPath}/">Cancel</a></td>
-						<td><input type="submit" value="RESET"></td>
-					</tr>
-				</table>
-			</form>
+			<div id="form">
+				<form action="ResetPass" method="post">
+					<table>
+						<tr>
+							<td>Username:</td>
+							<td>${uname}</td>
+						</tr>
+						<tr>
+							<td>* Old Password:</td>
+							<td><input type="password" name="oldpass"></td>
+						</tr>
+						<tr>
+							<td>* New Password:</td>
+							<td><input type="password" name="newpass"></td>
+						</tr>
+						<tr>
+							<td>* Reenter Password:</td>
+							<td><input type="password" name="renewpass"></td>
+						</tr>
+						<tr>
+							<td><a href="${pageContext.request.contextPath}/">Cancel</a></td>
+							<td><input type="submit" value="RESET"></td>
+						</tr>
+					</table>
+				</form>
+			</div>
 		</div>
 		<div id="pagebottom">@Copyright Roommate's Network (R)</div>
 	</div>

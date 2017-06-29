@@ -83,7 +83,7 @@ public class HomeServlet extends HttpServlet
 			}
 			else
 			{
-				request.setAttribute("banner", "something smelly!");
+				request.setAttribute("msg", "something smelly!");
 				getServletContext().getRequestDispatcher("/User.jsp").forward(request, response);
 			}
 		} catch (SQLException e) {

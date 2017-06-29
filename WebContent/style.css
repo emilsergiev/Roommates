@@ -1,5 +1,17 @@
 @CHARSET "UTF-8";
 
+.center {
+	text-align: center;
+}
+
+.right {
+	text-align: right;
+}
+
+.left {
+	text-align: left;
+}
+
 body {
 	margin: auto 150px;
 }
@@ -12,6 +24,11 @@ a {
 a:hover {
 	text-decoration: none;
 	color: #ff0000
+}
+
+.white {
+	text-decoration: none;
+	color: #ffffff;
 }
 
 #backgroundimage {
@@ -41,7 +58,24 @@ a:hover {
 }
 
 #pagemiddle {
+	clear: right;
 	text-align: center;
+}
+
+#form {
+	margin: 30px auto;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	width: 320px;
+	position: relative;
+}
+
+#register {
+	margin: 30px auto;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	width: 450px;
+	position: relative;
 }
 
 #pagebottom {
@@ -63,4 +97,24 @@ a:hover {
 
 .button:hover {
 	background: #45619d;
+}
+
+#users img {
+	height: 64px;
+	width: 64;
+}
+
+#users {
+	margin: 30px auto;
+	width: 1000px;
+	position: relative;
+}
+
+#users span {
+	float: left;
+	margin-bottom: 20px;
+}
+
+#etc {
+	clear: left;
 }

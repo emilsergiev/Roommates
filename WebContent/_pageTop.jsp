@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <div id="logo">
-	<h1>Roommate's Network (R)</h1>
+	<h2><a href="${pageContext.request.contextPath}" class="white">Roommate's Network (R)</a></h2>
 </div>
 <div id="userinfo">
 	<%

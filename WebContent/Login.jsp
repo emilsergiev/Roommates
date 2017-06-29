@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
-<title>Login</title>
+<title>Roommate's Network (R)</title>
 </head>
 <body>
 	<div id="backgroundimage">
@@ -13,24 +13,26 @@
 			<jsp:include page="_pageTop.jsp"></jsp:include>
 		</div>
 		<div id="pagemiddle">
-			<h1>-= Login Page =-</h1>
+			<h2>-= Login Page =-</h2>
 			<p>${msg}</p>
-			<form action="Login" method="post">
-				<table>
-					<tr>
-						<td>* Username:</td>
-						<td><input type="text" name="uname"></td>
-					</tr>
-					<tr>
-						<td>* Password:</td>
-						<td><input type="password" name="pass"></td>
-					</tr>
-					<tr>
-						<td><a href="${pageContext.request.contextPath}/">Cancel</a></td>
-						<td><input type="submit" value="Login"></td>
-					</tr>
-				</table>
-			</form>
+			<div id="form">
+				<form action="Login" method="post">
+					<table>
+						<tr>
+							<td>* Username:</td>
+							<td><input type="text" name="uname" required></td>
+						</tr>
+						<tr>
+							<td>* Password:</td>
+							<td><input type="password" name="pass" required></td>
+						</tr>
+						<tr>
+							<td><a href="${pageContext.request.contextPath}/">Cancel</a></td>
+							<td><input type="submit" value="Login"></td>
+						</tr>
+					</table>
+				</form>
+			</div>
 		</div>
 		<div id="pagebottom">@Copyright Roommate's Network (R)</div>
 	</div>

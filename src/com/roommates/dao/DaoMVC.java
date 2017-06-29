@@ -129,24 +129,33 @@ public class DaoMVC
 		return i;
 	}
 
-	public static List<ModelUser> queryUsers() throws SQLException
+	public static List<ModelUser> queryUsers(String sql) throws SQLException
 	{
 		Connection con = connect();
-		String sql = "SELECT uname, avatar FROM users";
-
 		PreparedStatement ps = con.prepareStatement(sql);
-
 		ResultSet rs = ps.executeQuery();
 		List<ModelUser> list = new ArrayList<ModelUser>();
 
 		while (rs.next())
 		{
 			String uname = rs.getString("uname");
+			String email = rs.getString("email");
+			String gender = rs.getString("gender");
+			String city = rs.getString("city");
+			String country = rs.getString("country");
+			String phone = rs.getString("phone");
+			String type = rs.getString("type");
 			String avatar = rs.getString("avatar");
-			ModelUser roommate = new ModelUser();
-			roommate.setUname(uname);
-			roommate.setAvatar(avatar);
-			list.add(roommate);
+			ModelUser user = new ModelUser();
+			user.setUname(uname);
+			user.setEmail(email);
+			user.setGender(gender);
+			user.setCity(city);
+			user.setCountry(country);
+			user.setPhone(phone);
+			user.setType(type);
+			user.setAvatar(avatar);
+			list.add(user);
 		}
 		con.close();
 		return list;

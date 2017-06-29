@@ -64,11 +64,11 @@ public class RegisterServlet extends HttpServlet
 		}
 		if(gender.equals("Male"))
 		{
-			user.setAvatar("male.png");
+			user.setAvatar("images/male.png");
 		}
 		else
 		{
-			user.setAvatar("female.png");
+			user.setAvatar("images/female.png");
 		}
 
 		Calendar calendar = Calendar.getInstance();
