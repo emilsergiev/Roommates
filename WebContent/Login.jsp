@@ -34,7 +34,7 @@
 				</form>
 			</div>
 		</div>
-		<div id="pagebottom">@Copyright Roommate's Network (R)</div>
+		<div id="pagebottom"><jsp:include page="_pageBottom.jsp"></jsp:include></div>
 	</div>
 </body>
 </html>

@@ -28,22 +28,16 @@ public class UpdateServlet extends HttpServlet
 		String type = request.getParameter("type");
 
 		HttpSession session = request.getSession();
-		session.setAttribute("uname", uname);
-		session.setAttribute("email", email);
-		session.setAttribute("gender", gender);
-		session.setAttribute("city", city);
-		session.setAttribute("country", country);
-		session.setAttribute("phone", phone);
-		session.setAttribute("type", type);
+		ModelUser loggedInUser = (ModelUser) session.getAttribute("loggedInUser");
+		loggedInUser.setUname(uname);
+		loggedInUser.setEmail(email);
+		loggedInUser.setGender(gender);
+		loggedInUser.setCity(city);
+		loggedInUser.setCountry(country);
+		loggedInUser.setPhone(phone);
+		loggedInUser.setType(type);
 
-		ModelUser user = new ModelUser();
-		user.setUname(uname);
-		user.setEmail(email);
-		user.setGender(gender);
-		user.setCity(city);
-		user.setCountry(country);
-		user.setPhone(phone);
-		user.setType(type);
+//		session.setAttribute("loggedInUser", loggedInUser);
 
 		if(uname.equals(null)||uname==""||email.equals(null)||email==""||gender.equals(null)||gender==""
 				||city.equals(null)||city==""||country.equals(null)||country==""||type.equals(null)||type=="")
@@ -53,7 +47,7 @@ public class UpdateServlet extends HttpServlet
 		}
 		else
 		{
-			int i = DaoMVC.updateUser(user);
+			int i = DaoMVC.updateUser(loggedInUser);
 
 			if(i != 0)
 			{

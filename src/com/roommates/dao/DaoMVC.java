@@ -1,6 +1,7 @@
 package com.roommates.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,20 +30,46 @@ public class DaoMVC
 		return con;
 	}
 
-	public static ResultSet findUser(ModelUser user)
+	public static ModelUser findUser(String uname)
 	{
-		ResultSet rs = null;
+		ModelUser user = null;
 		Connection con = connect();
 		String sql = "SELECT * FROM users WHERE uname = ?";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, user.getUname());
-			rs = ps.executeQuery();
-			//con.close();
+			ps.setString(1, uname);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()){
+				String username = rs.getString(1);
+				String email = rs.getString(2);
+				String gender = rs.getString(4);
+				String city = rs.getString(5);
+				String country = rs.getString(6);
+				String phone = rs.getString(7);
+				String type = rs.getString(8);
+				String avatar = rs.getString(9);
+				Date signup = rs.getDate(10);
+				long lastLogin = rs.getLong(11);
+				long notesCheck = rs.getLong(12);
+				user = new ModelUser();
+				user.setUname(username);
+				user.setEmail(email);
+				user.setGender(gender);
+				user.setCity(city);
+				user.setCountry(country);
+				user.setPhone(phone);
+				user.setType(type);
+				user.setAvatar(avatar);
+				user.setSignup(signup);
+				user.setLastLogin(lastLogin);
+				user.setNotesCheck(notesCheck);
+			}
+			con.close();
+			return user;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return rs;
+		return user;
 	}
 
 	public static int registerUser(ModelUser user)
@@ -72,21 +99,50 @@ public class DaoMVC
 		return i;
 	}
 
-	public static ResultSet loginUser(ModelUser user)
+	public static ModelUser loginUser(String uname, String pass)
 	{
-		ResultSet rs = null;
+		ModelUser user = null;
 		Connection con = connect();
 		String sql = "SELECT * FROM users WHERE uname = ? AND pass = ?";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, user.getUname());
-			ps.setString(2, user.getPass());
-			rs = ps.executeQuery();
-			//con.close();
+			ps.setString(1, uname);
+			ps.setString(2, pass);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				String username = rs.getString(1);
+				String email = rs.getString(2);
+				String password = rs.getString(3);
+				String gender = rs.getString(4);
+				String city = rs.getString(5);
+				String country = rs.getString(6);
+				String phone = rs.getString(7);
+				String type = rs.getString(8);
+				String avatar = rs.getString(9);
+				Date signup = rs.getDate(10);
+				long lastLogin = rs.getLong(11);
+				long notesCheck = rs.getLong(12);
+				user = new ModelUser();
+				user.setUname(username);
+				user.setEmail(email);
+				user.setPass(password);
+				user.setGender(gender);
+				user.setCity(city);
+				user.setCountry(country);
+				user.setPhone(phone);
+				user.setType(type);
+				user.setAvatar(avatar);
+				user.setSignup(signup);
+				user.setLastLogin(lastLogin);
+				user.setNotesCheck(notesCheck);
+			}
+			con.close();
+			return user;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return rs;
+		return user;
 	}
 
 	public static int updateUser(ModelUser user)
@@ -129,14 +185,15 @@ public class DaoMVC
 		return i;
 	}
 
-	public static List<ModelUser> queryUsers(String sql) throws SQLException
+	public static List<ModelUser> queryUsers(String sql, String x) throws SQLException
 	{
 		Connection con = connect();
 		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, x);
 		ResultSet rs = ps.executeQuery();
 		List<ModelUser> list = new ArrayList<ModelUser>();
 
-		while (rs.next())
+		while(rs.next())
 		{
 			String uname = rs.getString("uname");
 			String email = rs.getString("email");
@@ -146,6 +203,9 @@ public class DaoMVC
 			String phone = rs.getString("phone");
 			String type = rs.getString("type");
 			String avatar = rs.getString("avatar");
+			Date signup = rs.getDate("signup");
+			long lastLogin = rs.getLong("lastlogin");
+			long notesCheck = rs.getLong("notescheck");
 			ModelUser user = new ModelUser();
 			user.setUname(uname);
 			user.setEmail(email);
@@ -155,6 +215,9 @@ public class DaoMVC
 			user.setPhone(phone);
 			user.setType(type);
 			user.setAvatar(avatar);
+			user.setSignup(signup);
+			user.setLastLogin(lastLogin);
+			user.setNotesCheck(notesCheck);
 			list.add(user);
 		}
 		con.close();

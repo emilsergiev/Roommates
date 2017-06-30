@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
-<title>${uname}</title>
+<title>${user.uname}</title>
 </head>
 <body>
 	<div id="backgroundimage">
@@ -13,28 +13,27 @@
 			<jsp:include page="_pageTop.jsp"></jsp:include>
 		</div>
 		<div id="pagemiddle">
-			<div>
-				<p>${owner}</p>
-				<p>${logged}</p>
-				<p>${button}</p>
-			</div>
-			<p>${msg}</p>
-			<p>User: ${uname}</p>
-			<p>Email: ${email}</p>
-			<p>Gender: ${gender}</p>
-			<p>City: ${city}</p>
-			<p>Country: ${country}</p>
-			<p>Phone: ${phone}</p>
-			<p>Account type: ${type}</p>
-			<p>Picture: ${avatar}</p>
-			<p>Sign-up date:${signup}</p>
-			<p>Last login: ${lastlogin}</p>
-			<p>Notification check: ${notescheck}</p>
-			<p>
-				<a href="${pageContext.request.contextPath}/">Home</a>
-			</p>
+			<p>${owner}</p>
+			<p>${logged}</p>
+			<p>${button}</p>
 		</div>
-		<div id="pagebottom">@Copyright Roommate's Network (R)</div>
+		<div id="profile">
+			<div id="profileinfo">
+				<p>${msg}</p>
+				<p>User: ${user.uname}</p>
+				<p>Email: ${user.email}</p>
+				<p>Gender: ${user.gender}</p>
+				<p>City: ${user.city}</p>
+				<p>Country: ${user.country}</p>
+				<p>Phone: ${user.phone}</p>
+				<p>Account type: ${user.type}</p>
+				<p>Sign-up date: ${user.signup}</p>
+				<p>Last login: ${user.lastLogin}</p>
+				<p>Notification check: ${user.notesCheck}</p>
+			</div>
+			<img alt="avatar" src="${user.avatar}">
+		</div>
+		<div id="pagebottom"><jsp:include page="_pageBottom.jsp"></jsp:include></div>
 	</div>
 </body>
 </html>

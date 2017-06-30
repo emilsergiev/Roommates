@@ -20,41 +20,41 @@
 					<table>
 						<tr>
 							<td>Username:</td>
-							<td>${uname}</td>
-							<td><input type="hidden" name="uname" value="${uname}"></td>
+							<td>${loggedInUser.uname}</td>
+							<td><input type="hidden" name="uname" value="${loggedInUser.uname}"></td>
 						</tr>
 						<tr>
 							<td>* Email:</td>
-							<td><input type="email" name="email" value="${email}"
+							<td><input type="email" name="email" value="${loggedInUser.email}"
 								required></td>
 						</tr>
 						<tr>
 							<td>* Gender:</td>
 							<td><select name="gender" required>
-									<option value="${gender}">${gender}</option>
+									<option value="${loggedInUser.gender}">${loggedInUser.gender}</option>
 									<option value="Male">Male</option>
 									<option value="Female">Female</option>
 							</select></td>
 						</tr>
 						<tr>
 							<td>* City:</td>
-							<td><input type="text" name="city" value="${city}" required></td>
+							<td><input type="text" name="city" value="${loggedInUser.city}" required></td>
 						</tr>
 						<tr>
 							<td>* Country:</td>
 							<td><select name="country" required>
-									<option value="${country}">${country}</option>
+									<option value="${loggedInUser.country}">${loggedInUser.country}</option>
 									<jsp:include page="CountryList.jsp"></jsp:include>
 							</select></td>
 						</tr>
 						<tr>
 							<td>Phone:</td>
-							<td><input type="text" name="phone" value="${phone}"></td>
+							<td><input type="text" name="phone" value="${loggedInUser.phone}"></td>
 						</tr>
 						<tr>
 							<td>* Account Type:</td>
 							<td><select name="type" required>
-									<option value="${type}">${type}</option>
+									<option value="${loggedInUser.type}">${loggedInUser.type}</option>
 									<option value="buyer">BUYER (looking for a room)</option>
 									<option value="seller">SELLER (renting/sharing a room)</option>
 							</select></td>
@@ -67,7 +67,7 @@
 				</form>
 			</div>
 		</div>
-		<div id="pagebottom">@Copyright Roommate's Network (R)</div>
+		<div id="pagebottom"><jsp:include page="_pageBottom.jsp"></jsp:include></div>
 	</div>
 </body>
 </html>

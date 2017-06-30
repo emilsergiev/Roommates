@@ -23,9 +23,10 @@ public class ResetPassServlet extends HttpServlet
 		String newpass = request.getParameter("newpass");
 		String renewpass = request.getParameter("renewpass");
 		HttpSession session = request.getSession();
-		String cpass = (String)session.getAttribute("pass");
-		String uname = (String)session.getAttribute("uname");
-		
+		ModelUser loggedInUser = new ModelUser();
+		loggedInUser = (ModelUser) session.getAttribute("loggedInUser");
+		String cpass = loggedInUser.getPass();
+
 		if(oldpass.equals(null)||oldpass==""||newpass.equals(null)||newpass==""
 				||renewpass.equals(null)||renewpass=="")
 		{
@@ -44,14 +45,12 @@ public class ResetPassServlet extends HttpServlet
 		}
 		else
 		{
-			ModelUser user = new ModelUser();
-			user.setUname(uname);
-			user.setPass(newpass);
-			
-			int i = DaoMVC.resetPass(user);
+			loggedInUser.setPass(newpass);			
+			int i = DaoMVC.resetPass(loggedInUser);
 			
 			if(i != 0)
 			{
+//				session.setAttribute("loggedInUser", loggedInUser);
 				request.setAttribute("msg", "New password updated successfully");
 				getServletContext().getRequestDispatcher("/User.jsp").forward(request, response);
 			}
