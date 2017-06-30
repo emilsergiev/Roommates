@@ -15,8 +15,9 @@
 		} else {
 			ModelUser loggedInUser = (ModelUser) session.getAttribute("loggedInUser");
 			out.print("<form action='Logout' method='post' class='white'>"
-					+ " <a href='UpdateUser.jsp' class='white'> Update your info </a> | "
-					+ " <a href='ResetPass.jsp' class='white'> Reset your password </a> | "
+					+ " <a href='UpdateUser.jsp' class='white'> Update your info </a> |"
+					+ " <a href='ResetPass.jsp' class='white'> Reset your password </a> |"
+					+ " <a href='Notes'><img src='"+loggedInUser.getNotifications()+"'></a> |"
 					+ " <button type='submit' class='button'> Log Out </button></form>");
 		}
 	%>

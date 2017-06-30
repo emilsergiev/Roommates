@@ -37,8 +37,6 @@ public class UpdateServlet extends HttpServlet
 		loggedInUser.setPhone(phone);
 		loggedInUser.setType(type);
 
-//		session.setAttribute("loggedInUser", loggedInUser);
-
 		if(uname.equals(null)||uname==""||email.equals(null)||email==""||gender.equals(null)||gender==""
 				||city.equals(null)||city==""||country.equals(null)||country==""||type.equals(null)||type=="")
 		{

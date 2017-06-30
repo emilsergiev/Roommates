@@ -13,13 +13,10 @@
 			<jsp:include page="_pageTop.jsp"></jsp:include>
 		</div>
 		<div id="pagemiddle">
-			<p>${owner}</p>
-			<p>${logged}</p>
-			<p>${button}</p>
+			<p>${msg}</p>
 		</div>
 		<div id="profile">
 			<div id="profileinfo">
-				<p>${msg}</p>
 				<p>User: ${user.uname}</p>
 				<p>Email: ${user.email}</p>
 				<p>Gender: ${user.gender}</p>
@@ -32,6 +29,8 @@
 				<p>Notification check: ${user.notesCheck}</p>
 			</div>
 			<img alt="avatar" src="${user.avatar}">
+			<p>${button}</p>
+			<p>${owner}</p>
 		</div>
 		<div id="pagebottom"><jsp:include page="_pageBottom.jsp"></jsp:include></div>
 	</div>

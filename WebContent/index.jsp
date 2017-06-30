@@ -25,7 +25,7 @@
 						<jsp:include page="CountryList.jsp"></jsp:include>
 					</select> <input type="submit" value="Search">
 				</form>
-				${byCountry}
+				<p>${byCountry}</p>
 				<h3>Search for users by city:</h3>
 				<form action="City" method="post">
 					<input type="text" name="city" value="${loggedInUser.city}"

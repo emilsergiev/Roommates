@@ -1,6 +1,8 @@
 package com.roommates.model;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ModelUser {
 
@@ -16,6 +18,13 @@ public class ModelUser {
 	private Date signup;
 	private long lastLogin;
 	private long notesCheck;
+	private String notifications;
+	private List<String> friends = new ArrayList<String>();
+	private List<String> pendingFriends = new ArrayList<String>();
+	private List<String> requestedFriends = new ArrayList<String>();
+	private List<Mail> mail = new ArrayList<Mail>();
+	private int requests;
+	private int pms;
 
 	public String getUname() {
 		return uname;
@@ -88,6 +97,48 @@ public class ModelUser {
 	}
 	public void setNotesCheck(long notesCheck) {
 		this.notesCheck = notesCheck;
+	}
+	public String getNotifications() {
+		return notifications;
+	}
+	public void setNotifications(String notifications) {
+		this.notifications = notifications;
+	}
+	public int getPms() {
+		return pms;
+	}
+	public void setPms(int pms) {
+		this.pms = pms;
+	}
+	public List<String> getFriends() {
+		return friends;
+	}
+	public void setFriends(List<String> friends) {
+		this.friends = friends;
+	}
+	public List<Mail> getMail() {
+		return mail;
+	}
+	public void setMail(List<Mail> mail) {
+		this.mail = mail;
+	}
+	public List<String> getPendingFriends() {
+		return pendingFriends;
+	}
+	public void setPendingFriends(List<String> pendingFriends) {
+		this.pendingFriends = pendingFriends;
+	}
+	public List<String> getRequestedFriends() {
+		return requestedFriends;
+	}
+	public void setRequestedFriends(List<String> requestedFriends) {
+		this.requestedFriends = requestedFriends;
+	}
+	public int getRequests() {
+		return requests;
+	}
+	public void setRequests(int requests) {
+		this.requests = requests;
 	}
 
 }

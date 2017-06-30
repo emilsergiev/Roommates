@@ -1,6 +1,11 @@
 package com.roommates.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,9 +39,44 @@ public class LoginServlet extends HttpServlet
 
 			if(user != null)
 			{
+				Calendar calendar = Calendar.getInstance();
+				Date now = new Date(calendar.getTime().getTime());
+				long time = now.getTime();
+				String sql = "UPDATE users SET lastlogin = ? WHERE uname = ?";
+				int i = DaoMVC.updateTime(sql, uname, time);
+
+				if(i == 0)
+				{
+					request.setAttribute("msg", "Welcome " + user.getUname() + " - Sorry we could not update your login time");
+				}
+				else
+				{
+					request.setAttribute("msg", "Welcome " + user.getUname() + " - It's a good day today!");
+				}
+				if(user.getNotesCheck() > user.getLastLogin())
+				{
+					user.setNotifications("images/note_flash.gif");
+				}
+				else
+				{
+					user.setNotifications("images/note_still.jpg");
+				}
+				List<String> pendingRequests = DaoMVC.findRequests2u(uname, 0);
+				user.setPendingFriends(pendingRequests);
+				user.setRequests(pendingRequests.size());
+
+				List<String> pendingRequestsMade = DaoMVC.findYourRequests(uname, 0);
+				user.setRequestedFriends(pendingRequestsMade);
+
+				List<String> acceptedRequests = DaoMVC.findRequests2u(uname, 1);
+				List<String> acceptedRequestsMade = DaoMVC.findYourRequests(uname, 1);
+				List<String> madeFriends = new ArrayList<String>();
+				madeFriends.addAll(acceptedRequests);
+				madeFriends.addAll(acceptedRequestsMade);
+				user.setFriends(madeFriends);
+
 				HttpSession session = request.getSession();
 				session.setAttribute("loggedInUser", user);
-				request.setAttribute("msg", "Welcome " + user.getUname());
 				request.setAttribute("user", user);
 				getServletContext().getRequestDispatcher("/User.jsp").forward(request, response);
 			}
@@ -45,7 +85,6 @@ public class LoginServlet extends HttpServlet
 				request.setAttribute("msg", "invalid username or password!");
 				getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
 			}
-
 		}
 	}
 

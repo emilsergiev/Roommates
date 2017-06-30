@@ -145,6 +145,21 @@ public class DaoMVC
 		return user;
 	}
 
+	public static int updateTime(String sql, String uname, long time)
+	{
+		int i = 0;
+		Connection con = connect();
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setLong(1, time);
+			ps.setString(2, uname);
+			i = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return i;
+	}
+
 	public static int updateUser(ModelUser user)
 	{
 		int i = 0;
@@ -222,6 +237,68 @@ public class DaoMVC
 		}
 		con.close();
 		return list;
+	}
+
+	public static List<String> findRequests2u(String uname, int x)
+	{
+		Connection con = connect();
+		String sql = "SELECT user2 FROM friends WHERE user1 = ? AND accepted = ?";
+		List<String> list = new ArrayList<String>();
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, uname);
+			ps.setInt(2, x);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()){
+				String username = rs.getString("user2");
+				list.add(username);
+			}
+			con.close();
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		return list;
+	}
+
+	public static List<String> findYourRequests(String uname, int x)
+	{
+		Connection con = connect();
+		String sql = "SELECT user1 FROM friends WHERE user2 = ? AND accepted = ?";
+		List<String> list = new ArrayList<String>();
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, uname);
+			ps.setInt(2, x);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()){
+				String username = rs.getString("user1");
+				list.add(username);
+			}
+			con.close();
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		return list;
+	}
+
+	public static int requestFriend(String uname, String logged, Date now) {
+		int i = 0;
+		Connection con = connect();
+		String sql = "INSERT INTO friends (`user1`, `user2`, `datemade`, `accepted`) VALUES(?,?,?,?)";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, uname);
+			ps.setString(2, logged);
+			ps.setDate(3, now);
+			ps.setInt(4, 0);
+			i = ps.executeUpdate();
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return i;
 	}
 
 }

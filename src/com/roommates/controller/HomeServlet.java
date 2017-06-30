@@ -1,6 +1,8 @@
 package com.roommates.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,8 +22,7 @@ public class HomeServlet extends HttpServlet
 			throws ServletException, IOException
 	{
 		String uname = request.getParameter("uname");
-
-		String owner;
+		boolean friendCheck = false;
 		String button;
 
 		HttpSession session = request.getSession(false);
@@ -37,32 +38,43 @@ public class HomeServlet extends HttpServlet
 
 			if(session == null || logged == null)
 			{
-				request.setAttribute("logged", "login to check mailbox");
-				owner = "login to update your info";
-				request.setAttribute("owner", owner);
+				request.setAttribute("owner", "You are NOT logged in.");
 				button = "<form action='Login' method='post'>"
-						+ "<input type='text' name='uname' placeholder='Username' required>"
-						+ "<input type='password' name='pass' placeholder='Password' required>"
-						+ "<input type='submit' value='Login'></form>";
+						+ "<button type='submit' class='button'>Log In</button></form>";
 				request.setAttribute("button", button);
 			}
 			else if(logged.getUname().equals(uname))
 			{
-				request.setAttribute("logged", "<a href='#'>check your mailbox</a>");
-				owner = "<a href='UpdateUser.jsp'>click here to update your info</a><br>"
-						+ "<a href='ResetPass.jsp'>click here to reset your password</a>";
-				request.setAttribute("owner", owner);
-				button = "<form action='Logout' method='post'>Hello " + logged.getUname()
-						+ " <input type='submit' value='Logout'></form>";
+				request.setAttribute("owner", "You are the owner of this profile.");
+				button = "<form action='Avatar' method='post'>"
+						+ "<button type='submit' class='button'>Change Profile Avatar</button></form>";
 				request.setAttribute("button", button);
 			}
 			else
 			{
-				request.setAttribute("logged", "<a href='#'>check your mailbox</a>");
-				owner = "you are not the owner of this profile...";
-				request.setAttribute("owner", owner);
-				button = "<form action='Logout' method='post'>Hello " + logged.getUname()
-						+ " <input type='submit' value='Logout'></form>";
+				request.setAttribute("owner", "You are NOT the owner of this profile.");
+				List<String> list = logged.getFriends();
+
+				for(String friend : list)
+				{
+					if(friend.equals(uname))
+					{
+						friendCheck = true;
+						break;
+					}
+				}
+				if(friendCheck)
+				{
+					button = "<form action='Request' method='post'>"
+							+ "<input type='hidden' name='uname' value='" + uname + "'>"
+							+ "<button type='submit' class='button'>Unfriend</button></form>";
+				}
+				else
+				{
+					button = "<form action='Request' method='post'>"
+							+ "<input type='hidden' name='uname' value='" + uname + "'>"
+							+ "<button type='submit' class='button'>Request Friend</button></form>";
+				}
 				request.setAttribute("button", button);
 			}
 			getServletContext().getRequestDispatcher("/User.jsp").forward(request, response);
