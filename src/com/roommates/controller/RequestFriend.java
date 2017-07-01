@@ -39,20 +39,18 @@ public class RequestFriend extends HttpServlet
 
 			if (t != 0)
 			{
-				request.setAttribute("user", logged);
 				request.setAttribute("msg", "You have successfully send a friend request.");
 			}
 			else
 			{
-				request.setAttribute("user", logged);
 				request.setAttribute("msg", "Friend request sent, but could NOT update notes check.");
 			}
 		}
 		else
 		{
-			request.setAttribute("user", logged);
 			request.setAttribute("msg", "Sorry we could not send a friend request.");
 		}
+		request.setAttribute("user", logged);
 		getServletContext().getRequestDispatcher("/User.jsp").forward(request, response);
 	}
 

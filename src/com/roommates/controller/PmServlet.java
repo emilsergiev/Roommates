@@ -15,7 +15,6 @@ public class PmServlet extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
-		// TODO Auto-generated method stub
 		request.setAttribute("pms", "sorry this feature is not implemented yet :(");
 		getServletContext().getRequestDispatcher("/Notifications.jsp").forward(request, response);
 	}

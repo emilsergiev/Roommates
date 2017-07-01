@@ -301,4 +301,70 @@ public class DaoMVC
 		return i;
 	}
 
+	public static int unfriend(String uname, String lname)
+	{
+		int i = 0;
+		Connection con = connect();
+		String sql = "DELETE FROM friends WHERE (user1 = ? AND user2 = ?)"
+				+ " OR (user2 = ? AND user1 = ?);";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, uname);
+			ps.setString(2, lname);
+			ps.setString(3, uname);
+			ps.setString(4, lname);
+			i = ps.executeUpdate();
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return i;
+	}
+
+	public static int accept(String uname, String lname)
+	{
+		int i = 0;
+		Connection con = connect();
+		String sql = "UPDATE friends SET accepted = ? WHERE "
+				+ "(user1 = ? AND user2 = ?) OR (user2 = ? AND user1 = ?)";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, 1);
+			ps.setString(2, uname);
+			ps.setString(3, lname);
+			ps.setString(4, uname);
+			ps.setString(5, lname);
+			i = ps.executeUpdate();
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return i;
+	}
+
+	public static List<String> findFriends(String uname)
+	{
+		Connection con = connect();
+		String sql = "SELECT * FROM friends WHERE (user1 = ? OR user2 = ?) AND accepted = ?";
+		List<String> list = new ArrayList<String>();
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, uname);
+			ps.setString(2, uname);
+			ps.setInt(3, 1);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()){
+				String user1 = rs.getString("user1");
+				if(!user1.equals(uname)) list.add(user1);
+				String user2 = rs.getString("user2");
+				if(!user2.equals(uname)) list.add(user2);
+			}
+			con.close();
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 }
