@@ -64,9 +64,9 @@ public class HomeServlet extends HttpServlet
 		{
 			request.setAttribute("owner", "You are NOT the owner of this profile.");
 
-			for(String friend : friends)
+			for(String frnd : friends)
 			{
-				if(friend.equals(uname))
+				if(frnd.equals(uname) || frnd.equals(logged.getUname()))
 				{
 					friendCheck = true;
 					break;
@@ -115,6 +115,12 @@ public class HomeServlet extends HttpServlet
 					if(requestedCheck)
 					{
 						button = "Your friend request is pending...";
+					}
+					else if(friendCheck)
+					{
+						button = "<form action='Unfriend' method='post'>"
+								+ "<input type='hidden' name='uname' value='" + uname + "'>"
+								+ "<button type='submit' class='button'>Unfriend</button></form>";
 					}
 					else
 					{

@@ -17,7 +17,7 @@
 					today!
 				</strong>
 			</p>
-			<div id="users">
+			<div id="home">
 				<h3>Search for users by country:</h3>
 				<form action="Country" method="post">
 					<select name="country" required>

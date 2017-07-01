@@ -16,8 +16,8 @@
 			<form action="Friends" method="post">
 				<p>New Friend Requests: ${loggedInUser.requests} - <input type="submit" value="Check"></p>
 			</form>
-			<p>${friendRequests}</p>
-			<form action="PMs" method="post">
+			<div id="users">${friendRequests}</div>
+			<form action="PMs" method="post" id="etc">
 				<p>New Private Messages: ${loggedInUser.pms} - <input type="submit" value="Check"></p>
 			</form>
 			<p>${pms}</p>

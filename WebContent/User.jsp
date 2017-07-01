@@ -29,10 +29,14 @@
 				<p>Notification check: ${user.notesCheck}</p>
 			</div>
 			<img alt="avatar" src="${user.avatar}">
-			<p>${owner}</p>
-			<p>${button} ${deny}</p>
+			<div>
+				<p>${owner}</p>
+				<p>${button}</p>
+				<p>${deny}</p>
+			</div>
 		</div>
-		<div><p>${friends}</p></div>
+		<h3 class="center">Friends:</h3>
+		<div id="users">${friends}</div>
 		<div id="pagebottom"><jsp:include page="_pageBottom.jsp"></jsp:include></div>
 	</div>
 </body>

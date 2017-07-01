@@ -64,7 +64,7 @@ a:hover {
 #profile {
 	margin: 10px auto;
 	width: 800px;
-	height: 400px;
+	height: 250px;
 	position: relative;
 }
 
@@ -75,7 +75,7 @@ a:hover {
 #profile img {
 	float: right;
 	height: 250px;
-	length: 250px;
+	width: 250px;
 }
 
 #pagemiddle {
@@ -122,18 +122,40 @@ a:hover {
 	background: #45619d;
 }
 
+#users {
+	clear: left;
+	margin: 30px auto;
+	width: 800px;
+	height: 150px;
+	position: relative;
+	text-align: center;
+}
+
 #users img {
 	height: 64px;
 	width: 64;
 }
 
-#users {
+#users span {
+	float: left;
 	margin: 30px auto;
-	width: 900px;
-	position: relative;
 }
 
-#users span {
+#home {
+	clear: left;
+	margin: 30px auto;
+	width: 800px;
+	min-height: 350px;
+	position: relative;
+	text-align: center;
+}
+
+#home img {
+	height: 64px;
+	width: 64;
+}
+
+#home span {
 	float: left;
 	margin: 30px auto;
 }

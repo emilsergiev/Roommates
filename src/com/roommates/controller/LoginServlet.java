@@ -75,21 +75,21 @@ public class LoginServlet extends HttpServlet
 				madeFriends.addAll(acceptedRequestsMade);
 				user.setFriends(madeFriends);
 				
-				StringBuilder sb = new StringBuilder();
-
-				for(String name : madeFriends)
-				{
-					ModelUser friend = DaoMVC.findUser(name);
-					sb.append(String.format("<span><a href='Home?uname=%s'><img src='%s' alt='avatar'></a>"
-							+ "<br>%s</span>", friend.getUname(), friend.getAvatar(), friend.getUname()));
-				}
-				String result = sb.toString();
+//				StringBuilder sb = new StringBuilder();
+//
+//				for(String name : madeFriends)
+//				{
+//					ModelUser friend = DaoMVC.findUser(name);
+//					sb.append(String.format("<span><a href='Home?uname=%s'><img src='%s' alt='avatar'></a>"
+//							+ "<br>%s</span>", friend.getUname(), friend.getAvatar(), friend.getUname()));
+//				}
+//				String result = sb.toString();
 
 				HttpSession session = request.getSession();
 				session.setAttribute("loggedInUser", user);
-				request.setAttribute("user", user);
-				request.setAttribute("friends", result);
-				getServletContext().getRequestDispatcher("/User.jsp").forward(request, response);
+//				request.setAttribute("user", user);
+//				request.setAttribute("friends", result);
+				getServletContext().getRequestDispatcher("/Home?uname="+uname).forward(request, response);
 			}
 			else
 			{
